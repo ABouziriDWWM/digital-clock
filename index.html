@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock</title>
+</head>
+
+<body>
+    <style>
+        body {
+            /* Set a background image for the entire page */
+            background-image: url(https://s2.qwant.com/thumbr/474x266/f/1/574485cec50e8f3b3ce672d91335f942530dacc27a0eb84abf44bfc374bdfe/OIP.T7kF2bWtIUyzxF3rG6K1UgHaEK.jpg?u=https%3A%2F%2Ftse.mm.bing.net%2Fth%2Fid%2FOIP.T7kF2bWtIUyzxF3rG6K1UgHaEK%3Fr%3D0%26pid%3DApi&q=0&b=1&p=0&a=0);
+            background-size: cover;
+            /* Make sure the image covers the whole background */
+            background-position: center;
+            /* Center the background image */
+            background-repeat: no-repeat;
+            /* Prevent the background from repeating */
+            background-attachment: fixed;
+            /* Make the background fixed when scrolling */
+            margin: 0;
+            /* Remove default margin */
+        }
+
+        #clock-countainer {
+            display: flex;
+            /* Use flexbox to center content */
+            justify-content: center;
+            /* Center horizontally */
+            align-items: center;
+            /* Center vertically */
+            height: 100vh;
+            /* Full viewport height */
+            border: 2px solid;
+            /* Add a border around the container */
+        }
+
+        #clock {
+            font-family: monospace;
+            /* Use monospace font for the clock */
+            font-size: 6.5rem;
+            /* Large font size */
+            font-weight: bold;
+            /* Make the text bold */
+            text-align: center;
+            /* Center the text inside the clock */
+            backdrop-filter: blur(5px);
+            /* Add a blur effect behind the clock */
+            width: 90%;
+            /* Make the clock container 90% of its parent width */
+            background-color: hsla(0, 0%, 100%, 0.5);
+            /* Semi-transparent white background */
+        }
+    </style>
+
+    <!-- Container for the clock -->
+    <div id="clock-countainer">
+        <!-- Clock display -->
+        <div id="clock">00:00:00</div>
+    </div>
+
+    <script>
+        function updateClock() {
+            const now = new Date(); // Get current date and time
+
+            let hours = now.getHours();  // Get the current hour (0-23)
+            const meridiem = hours >= 12 ? "PM" : "AM"; // Determine AM or PM
+
+            hours = hours % 12 || 12; // Convert to 12-hour format
+
+            // Format hours, minutes, and seconds to always be two digits
+            hours = hours.toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const seconds = now.getSeconds().toString().padStart(2, '0');
+
+            // Update the clock display with formatted time and meridiem
+            document.getElementById("clock").textContent = `${hours}:${minutes}:${seconds} ${meridiem}`;
+        }
+
+        updateClock(); // Run immediately on load
+        setInterval(updateClock, 1000); // Update every second
+    </script>
+</body>
+
+</html>
